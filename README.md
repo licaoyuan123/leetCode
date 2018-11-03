@@ -1,2 +1,2 @@
 # leetCode
-My leetCode experience
+Record all my solutions to leetcode problem.
