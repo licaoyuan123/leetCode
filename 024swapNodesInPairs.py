@@ -11,6 +11,7 @@ class Solution:
         :type head: ListNode
         :rtype: ListNode
         """
+        #Solution from https://blog.csdn.net/coder_orz/article/details/51532184
          if not head or not head.next:
             return head
         pre = new_head = ListNode(0)
