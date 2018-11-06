@@ -1,3 +1,6 @@
+#Two solutions 
+#First is to use heap O(n)=n * log k
+#Second is to use sorted array, O(n)= n* klog(k)
 import heapq
 class KthLargest:
 
@@ -20,8 +23,11 @@ class KthLargest:
         """
         if len(self.heapList)<self.k:
             heapq.heappush(self.heapList, val)
-        elif val> self.heapList[0]:
-            heapq.heapreplace(self.heapList, val)
+        else:
+            heapq.heappushpop(self.heapList, val)
+
+            #         elif val> self.heapList[0]:
+#             heapq.heapreplace(self.heapList, val)
         return self.heapList[0]
 #     def __init__(self, k, nums):
 #         """
