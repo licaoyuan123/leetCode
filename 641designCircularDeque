@@ -1,0 +1,128 @@
+
+
+#solution 1, using linkedlist
+class Node(object):
+    def __init__(self, val):
+        self.val = val
+        self.pre = self.next = None
+
+class MyCircularDeque(object):
+
+    def __init__(self, k):
+        """
+        Initialize your data structure here. Set the size of the deque to be k.
+        :type k: int
+        """
+        self.size = k
+        self.currentSize= 0
+        self.head =self.tail = Node(-1)
+        self.head.next = self.tail
+        self.tail.pre = self.head
+        
+        
+    def add(self, preNode, val):
+        node = Node(val)
+        node.pre = preNode
+        node.next = preNode.next
+        #preNode.next = node
+        #Important, and I lost it
+        node.pre.next = node
+        node.next.pre= node
+        self.currentSize+=1
+    def delete(self, preNode):
+        node = preNode.next
+        node.pre.next=  node.next
+        node.next.pre = node.pre
+        self.currentSize -= 1
+
+    def insertFront(self, value):
+        """
+        Adds an item at the front of Deque. Return true if the operation is successful.
+        :type value: int
+        :rtype: bool
+        """
+        if self.currentSize==self.size:
+            return False
+        self.add(self.head, value)
+        return True
+        
+
+    def insertLast(self, value):
+        """
+        Adds an item at the rear of Deque. Return true if the operation is successful.
+        :type value: int
+        :rtype: bool
+        """
+        if self.currentSize==self.size:
+            return False
+        self.add(self.tail.pre, value)
+        return True
+        
+
+    def deleteFront(self):
+        """
+        Deletes an item from the front of Deque. Return true if the operation is successful.
+        :rtype: bool
+        """
+        if self.currentSize:
+            self.delete(self.head)
+            return True
+        return False
+            
+
+    def deleteLast(self):
+        """
+        Deletes an item from the rear of Deque. Return true if the operation is successful.
+        :rtype: bool
+        """
+        if self.currentSize:
+            self.delete(self.tail.pre.pre)
+            return True
+        return False
+        
+
+    def getFront(self):
+        """
+        Get the front item from the deque.
+        :rtype: int
+        """
+        if self.currentSize:
+            return self.head.next.val
+        return -1    
+
+    def getRear(self):
+        """
+        Get the last item from the deque.
+        :rtype: int
+        """
+        if self.currentSize:
+            return self.tail.pre.val
+        return -1
+
+    def isEmpty(self):
+        """
+        Checks whether the circular deque is empty or not.
+        :rtype: bool
+        """
+        return self.currentSize==0
+        
+
+    def isFull(self):
+        """
+        Checks whether the circular deque is full or not.
+        :rtype: bool
+        """
+        return self.currentSize==self.size
+        
+
+
+# Your MyCircularDeque object will be instantiated and called as such:
+# obj = MyCircularDeque(k)
+# param_1 = obj.insertFront(value)
+# param_2 = obj.insertLast(value)
+# param_3 = obj.deleteFront()
+# param_4 = obj.deleteLast()
+# param_5 = obj.getFront()
+# param_6 = obj.getRear()
+# param_7 = obj.isEmpty()
+# param_8 = obj.isFull()
