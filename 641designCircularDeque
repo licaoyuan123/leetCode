@@ -1,4 +1,5 @@
 #Solution 0, using list
+#I come up with solution 0 because I do not know -1%5=4, so there is a better solution according to this information
 class MyCircularDeque(object):
 
     def __init__(self, k):
