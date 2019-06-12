@@ -10,28 +10,44 @@ class Solution(object):
         :type head1, head1: ListNode
         :rtype: ListNode
         """
-        lenA = 0
-        lenB = 0
-        curA, curB = headA, headB
-        while curA!=None:
-            lenA+=1
-            curA= curA.next
-        while curB!=None:
-            lenB+=1
-            curB =curB.next
-        indA, indB = headA, headB
-        if lenA>lenB:
-            k= lenA-lenB
-            for i in range(k):
-                indA= indA.next
-        else:
-            k = lenB-lenA
-            for i in range(k):
-                indB = indB.next
-        while indA!=indB:
-            indA= indA.next
-            indB = indB.next
-        return indA
+        curA = headA
+        d= {}
+        count=0
+        while curA:
+            d[curA] =count
+            count+=1
+            curA = curA.next
+        curB  = headB
+        while curB:
+            if curB in d:
+                return curB
+            curB = curB.next
+        return None
+       
+        
+        
+        # lenA = 0
+        # lenB = 0
+        # curA, curB = headA, headB
+        # while curA!=None:
+        #     lenA+=1
+        #     curA= curA.next
+        # while curB!=None:
+        #     lenB+=1
+        #     curB =curB.next
+        # indA, indB = headA, headB
+        # if lenA>lenB:
+        #     k= lenA-lenB
+        #     for i in range(k):
+        #         indA= indA.next
+        # else:
+        #     k = lenB-lenA
+        #     for i in range(k):
+        #         indB = indB.next
+        # while indA!=indB:
+        #     indA= indA.next
+        #     indB = indB.next
+        # return indA
         
         
         
@@ -71,5 +87,15 @@ class Solution(object):
 #         for i in range(indexB):
 #             res = res.next
 #         return res
+
+#  curA = headA
+#         while curA:
+#             curB = headB
+#             while curB:
+#                 if curA==curB:
+#                     return curA
+#                 curB = curB.next
+#             curA = curA.next
+#         return None
             
         
