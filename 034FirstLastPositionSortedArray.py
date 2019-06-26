@@ -5,6 +5,29 @@ class Solution(object):
         :type target: int
         :rtype: List[int]
         """
+        #Binary search find where to insert target and target+1
+        
+        def search(t):
+            lo, hi= 0, len(nums)
+            while lo<hi:
+                mid = (lo+hi)/2
+                if nums[mid]>=t:
+                    hi= mid
+                else:
+                    lo = mid+1
+            return lo
+        lo = search(target)
+        return [lo, search(target+1)-1] if target in nums[lo:lo+1] else [-1, -1]
+        
+
+
+class Solution(object):
+    def searchRange(self, nums, target):
+        """
+        :type nums: List[int]
+        :type target: int
+        :rtype: List[int]
+        """
         #Let's try to use binary search
         
         result = [-1, -1]
