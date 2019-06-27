@@ -18,6 +18,8 @@ class Solution(object):
             res.append(path)
             return
         for i in xrange(index ,len(nums)):
+            if nums[i]>target:
+                break
             self.dfs(nums, target- nums[i],i, path+[nums[i]], res )
         
         
