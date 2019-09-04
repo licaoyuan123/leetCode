@@ -4,6 +4,35 @@ class Solution(object):
         :type x: int
         :rtype: int
         """
+        start, end = 0, x
+        while start+1<end:
+            mid = start+(end-start)/2
+            if mid**2 == x:
+                return mid
+            else:
+                if mid**2>x:
+                    end= mid
+                else:
+                    start = mid
+        if end**2<=x:
+            return end
+        return start
+        # for i in range(x/2+1):
+        #     if i**2==x:
+        #         return i
+        #     if i**2<=x and (i+1)**2>x:
+        #         return i
+            
+        
+
+
+
+class Solution(object):
+    def mySqrt(self, x):
+        """
+        :type x: int
+        :rtype: int
+        """
         if x==0 or x==1:
             return x
         
