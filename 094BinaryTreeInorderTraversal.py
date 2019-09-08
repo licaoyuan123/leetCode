@@ -11,19 +11,69 @@ class Solution(object):
         :type root: TreeNode
         :rtype: List[int]
         """
-        #Solution3 non recursive or iterative
         if not root:
             return []
-        stack, path=[], []
-        while True:
-            while root:
-                stack.append(root)
-                root=root.left
-            if not stack:
-                return path
-            node=stack.pop()
-            path.append(node.val)
-            root=node.right
+        stack, path=[(root, False)], []
+        while stack:
+            node, visited=stack.pop()
+            if node:
+                if visited:
+                    path.append(node.val)
+                else:
+                    stack.append((node.right, False))
+                    stack.append((node, True))
+                    stack.append((node.left, False))
+        return path
+        
+        
+#         if not root:
+#             return []
+#         path, stack = [], []
+#         while True:
+#             while root:
+#                 stack.append(root)
+#                 root=root.left
+            
+#             if not stack:
+#                 return path
+#             node=stack.pop()
+#             path.append(node.val)
+#             root=node.right
+        
+        
+        
+        
+        
+        # if not root:
+        #     return []
+        # dummyNode=TreeNode(0)
+        # dummyNode.right=root
+        # stack, path=[],[]
+        # stack.append(dummyNode)
+        # while stack:
+        #     node=stack.pop()
+        #     node=node.right
+        #     while node:
+        #         stack.append(node)
+        #         node=node.left
+        #     if stack:
+        #         path.append(stack[-1].val)
+        # return path     
+        
+        
+        #Solution3 non recursive or iterative
+#         if not root:
+#             return []
+#         stack, path=[], []
+#         while True:
+#             while root:
+#                 stack.append(root)
+#                 root=root.left
+#             if not stack:
+#                 return path
+#             node=stack.pop()
+#             path.append(node.val)
+#             root=node.right
         
     
             
