@@ -6,26 +6,37 @@
 #         self.right = None
 
 class Solution(object):
+    
     def maxDepth(self, root):
         """
         :type root: TreeNode
         :rtype: int
         """
-        #Solution 4 BFS
-        max_depth=0
+        self.max_depth=0
+        self.helper(root, 1)
+        return self.max_depth
+    def helper(self, root, current_depth):
+        if not root:
+            return
+        self.max_depth=max(current_depth, self.max_depth)
+        self.helper(root.left, current_depth+1)
+        self.helper(root.right, current_depth+1)
         
-        level=[root] if root else []
-        while level:
-            max_depth+=1
-            queue=[]
-            for node in level:
-                if node.left:
-                    queue.append(node.left)
-                if node.right:
-                    queue.append(node.right)
-            #queue.append()
-            level = queue
-        return max_depth
+        #Solution 4 BFS
+#         max_depth=0
+        
+#         level=[root] if root else []
+#         while level:
+#             max_depth+=1
+#             queue=[]
+#             for node in level:
+#                 if node.left:
+#                     queue.append(node.left)
+#                 if node.right:
+#                     queue.append(node.right)
+#             #queue.append()
+#             level = queue
+#         return max_depth
         
         
         
