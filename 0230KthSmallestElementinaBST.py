@@ -15,7 +15,10 @@ class Solution:
                 stack.append(root)
                 root=root.left
             root=stack.pop()
-            result.append(root.val)
+            k-=1
+            if not k:
+                break
+            #result.append(root.val)
             root=root.right
-        return result[k-1]
+        return root.val
         
