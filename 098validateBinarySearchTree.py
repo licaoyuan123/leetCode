@@ -9,19 +9,38 @@ class Solution:
     def isValidBST(self, root: TreeNode) -> bool:
         if not root:
             return True
-        stack=[]
-        prev = float("-inf")
-        while root or stack:
-            while root:
-                stack.append(root)
-                root=root.left
-            root=stack.pop()
-            #result.append(root.val)
-            if prev>=root.val:
-                return False
-            prev = root.val
-            root=root.right
-        return True
+        self.v = True
+        self.lastNodeVal=None
+        self.valid(root)
+        return self.v
+    def valid(self, root):
+        if not root:
+            return
+        self.valid(root.left)
+        if self.lastNodeVal is not None and self.lastNodeVal>=root.val:
+            self.v=False
+            return
+        self.lastNodeVal =root.val
+        
+        self.valid(root.right)
+        
+        
+        
+        # if not root:
+        #     return True
+        # stack=[]
+        # prev = float("-inf")
+        # while root or stack:
+        #     while root:
+        #         stack.append(root)
+        #         root=root.left
+        #     root=stack.pop()
+        #     #result.append(root.val)
+        #     if prev>=root.val:
+        #         return False
+        #     prev = root.val
+        #     root=root.right
+        # return True
         
         #Third solution
         # if not root:
