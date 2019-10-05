@@ -3,21 +3,27 @@ class Solution:
         """
         Do not return anything, modify nums in-place instead.
         """
-        left=0
-        right=len(nums)-1
-        zero=0
+        counter= collections.Counter(nums)
+        nums[0:counter[0]] =[0]*counter[0]
+        nums[counter[0]:counter[0]+counter[1]]=[1]*counter[1]
+        nums[counter[0]+counter[1]:]=[2]*counter[2]
         
-        while left<=right:
-            if nums[left]==0:
-                nums[left], nums[zero] = nums[zero], nums[left]
-                zero+=1
-                left+=1
+        
+#         left=0
+#         right=len(nums)-1
+#         zero=0
+        
+#         while left<=right:
+#             if nums[left]==0:
+#                 nums[left], nums[zero] = nums[zero], nums[left]
+#                 zero+=1
+#                 left+=1
             
-            elif nums[left]==2:
-                nums[left], nums[right] = nums[right], nums[left]
-                right-=1
-            else:
-                left+=1
+#             elif nums[left]==2:
+#                 nums[left], nums[right] = nums[right], nums[left]
+#                 right-=1
+#             else:
+#                 left+=1
         
         
         
