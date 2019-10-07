@@ -1,3 +1,41 @@
+#Best Solution:
+
+class Solution:
+    """
+    @param: A: An integer array.
+    @return: nothing
+    """
+    def rerange(self, A):
+        # write your code here
+        #Solution 3
+        N=len(A)
+        left=0
+        right=N-1
+        while left<=right:
+            while left<=right and A[left]<0:
+                left+=1
+            while left<=right and A[right]>0:
+                right-=1
+            if left<right:
+                A[left], A[right] =A[right], A[left]
+                left+=1
+                right-=1
+        negative_num = left
+        positive_num = N-negative_num
+        if negative_num>=positive_num:
+            left=1
+        else:
+            left=0
+        if positive_num>=negative_num:
+            right=N-2
+        else:
+            right=N-1
+        while left<=right:
+            A[left], A[right] = A[right], A[left]
+            left+=2
+            right-=2
+
+
 class Solution:
     """
     @param: A: An integer array.
