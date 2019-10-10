@@ -3,6 +3,23 @@
 #so we can get the first smaller value's index(left is the previous one, right is the current one)
 #we use the stack to store index to calculate the width
 #add -1 to the end to make sure each value is poped.
+#add -1 to stack to make it more clear
+
+
+class Solution:
+    def largestRectangleArea(self, heights: List[int]) -> int:
+        heights.append(0)
+        stack = [-1]
+        max_area = 0
+        for i in range(len(heights)):
+            while heights[i]<heights[stack[-1]]:
+                height= heights[stack.pop()]
+                width=i-stack[-1]-1
+                max_area = max(max_area, height*width)
+            stack.append(i)
+        return max_area
+    
+    
 
 
 class Solution:
