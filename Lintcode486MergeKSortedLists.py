@@ -4,6 +4,27 @@ class Solution:
     @return: a sorted array
     """
     def mergekSortedArrays(self, arrays):
+        def mergekSortedArrays(self, arrays):
+        # write your code here
+        if not arrays:
+            return []
+        pq = PriorityQueue()
+        count=0
+        for array in arrays:
+            if array:
+                pq.put((array[0], count, 0, array))
+                count+=1
+        result = []
+        while not pq.empty():
+            val, _,index, array = pq.get()
+            result.append(val)
+            if index+1<len(array):
+                index+=1
+                count+=1
+                pq.put((array[index], count, index, array))
+        return result
+        
+        
         # write your code here
         #N= len(arrays)
         # while len(arrays)!=1:
