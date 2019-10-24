@@ -8,21 +8,113 @@ class Node:
 from queue import deque
 class Solution:
     def cloneGraph(self, node: 'Node') -> 'Node':
-        
+        #DFS recursive
         if not node:
-            return None
+            return
         new_node = Node(node.val, [])
-        dic = {node:new_node}
-        dq = deque([node])
-        while dq:
-            next_node = dq.popleft()
-            for neighbor in next_node.neighbors:
-                if neighbor not in dic:
-                    neighbor_copy = Node(neighbor.val, [])
-                    dic[neighbor] = neighbor_copy
-                    dq.append(neighbor)
-                dic[next_node].neighbors.append(dic[neighbor])
+        dic = {}
+        dic[node] = new_node
+        stack = [node]
+        self.dfs(stack, dic)
         return new_node
+    def dfs(self, stack, dic):
+        if not stack:
+            return
+        node = stack.pop()
+        for neighbor in node.neighbors:
+            if neighbor not in dic:
+                new_neighbor = Node(neighbor.val, [])
+                dic[neighbor] = new_neighbor
+                stack.append(neighbor)
+                self.dfs(stack, dic)
+            dic[node].neighbors.append(dic[neighbor])
+        
+        
+        #DFS iteratively:
+        # if not node:
+        #     return None
+        # dic={}
+        # new_node = Node(node.val, [])
+        # dic[node] = new_node
+        # stack=[node]
+        # while stack:
+        #     node = stack.pop()
+        #     for neighbor in node.neighbors:
+        #         if neighbor not in dic:
+        #             new_neighbor = Node(neighbor.val, [])
+        #             dic[neighbor] = new_neighbor
+        #             stack.append(neighbor)
+        #         dic[node].neighbors.append(dic[neighbor])
+        # return new_node
+
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        #BFS
+        # if not node:
+        #     return None
+        # new_node = Node(node.val, [])
+        # dq = deque([node])
+        # dic={}
+        # dic[node] = new_node
+        # while dq:
+        #     node = dq.popleft()
+        #     for neighbor in node.neighbors:
+        #         if neighbor not in dic:
+        #             new_neighbor = Node(neighbor.val, [])
+        #             dic[neighbor] = new_neighbor
+        #             dq.append(neighbor)
+        #         dic[node].neighbors.append(dic[neighbor])
+        # return new_node
+            
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        # if not node:
+        #     return None
+        # new_node = Node(node.val, [])
+        # dic = {node:new_node}
+        # dq = deque([node])
+        # while dq:
+        #     next_node = dq.popleft()
+        #     for neighbor in next_node.neighbors:
+        #         if neighbor not in dic:
+        #             neighbor_copy = Node(neighbor.val, [])
+        #             dic[neighbor] = neighbor_copy
+        #             dq.append(neighbor)
+        #         dic[next_node].neighbors.append(dic[neighbor])
+        # return new_node
 
             
         
