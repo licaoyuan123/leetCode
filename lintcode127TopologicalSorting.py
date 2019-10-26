@@ -14,6 +14,35 @@ class Solution:
     @return: Any topological order for the given graph.
     """
     def topSort(self, graph):
+        dic = self.get_indegree(graph)
+        start_nodes = [node for node in graph if dic[node]==0]
+        queue = collections.deque(start_nodes)
+        # for node in :
+        #     for
+        order = []
+        while queue:
+            node = queue.popleft()
+            order.append(node)
+            for neighbor in node.neighbors:
+                dic[neighbor]-=1
+                if dic[neighbor]==0:
+                    queue.append(neighbor)
+        return order
+        
+    def get_indegree(self, graph):
+        dic={x:0 for x in graph}
+        for node in graph:
+            for neighbor in node.neighbors:
+                dic[neighbor]+=1
+        return dic
+
+
+class Solution:
+    """
+    @param: graph: A list of Directed graph node
+    @return: Any topological order for the given graph.
+    """
+    def topSort(self, graph):
         # write your code here
         if not graph:
             return []
