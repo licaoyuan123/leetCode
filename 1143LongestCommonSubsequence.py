@@ -1,3 +1,14 @@
+#Add the following function to trace the longest subsequence according the table
+function backtrack(C[0..m,0..n], X[1..m], Y[1..n], i, j)
+    if i = 0 or j = 0
+        return ""
+    if  X[i] = Y[j]
+        return backtrack(C, X, Y, i-1, j-1) + X[i]
+    if C[i,j-1] > C[i-1,j]
+        return backtrack(C, X, Y, i, j-1)
+    return backtrack(C, X, Y, i-1, j)
+
+
 class Solution:
     def longestCommonSubsequence(self, text1: str, text2: str) -> int:
         dp=[[0]*(len(text2)+1) for _ in range(len(text1)+1)]
