@@ -1,3 +1,84 @@
+class Solution:
+    def maxProfit(self, prices: List[int]) -> int:
+        #Expand K
+        N= len(prices)
+        if N<2:
+            return 0
+        buy1=buy2=float("inf")
+        sell1=sell2=0
+        for i in range(N):
+            buy1=min(prices[i], buy1)
+            sell1=max(sell1, prices[i]-buy1)
+            buy2=min(buy2, prices[i]-sell1)
+            sell2=max(sell2, prices[i]-buy2)
+        return sell2
+        #Compact one dimension
+        N= len(prices)
+        K=2
+        if N<2:
+            return 0
+        max_diff_vec=[-prices[0]]*(K+1)
+        dp=[0]*(K+1)
+        for i in range(1, N):
+            for k in range(1, K+1):
+                max_diff_vec[k]=max(dp[k-1]-prices[i], max_diff_vec[k])
+                dp[k]=max(dp[k], max_diff_vec[k]+prices[i])
+        return dp[K]
+        
+        
+        #Swap two fors
+        N= len(prices)
+        K=2
+        if N<2:
+            return 0
+        max_diff_vec=[-prices[0]]*(K+1)
+        dp=[[0]*N for i in range(K+1)]
+        for i in range(1, N):
+            #max_diff=-prices[0]
+            for k in range(1, K+1):
+                max_diff_vec[k]=max(dp[k-1][i-1]-prices[i], max_diff_vec[k])
+                dp[k][i]=max(dp[k][i-1], max_diff_vec[k]+prices[i])
+        return dp[K][N-1]  
+        
+        
+        #O(KN) Observation and find the repeated part and then 
+        #make optimization
+        N= len(prices)
+        K=2
+        if N<2:
+            return 0
+        dp=[[0]*N for i in range(K+1)]
+        for k in range(1, K+1):
+            max_diff=-prices[0]
+            #max_diff=0
+            for i in range(1, N):
+                max_diff=max(dp[k-1][i-1]-prices[i], max_diff)
+                # if i>1:
+                #     max_diff=max(dp[k-1][i-2]-prices[i-1], max_diff)
+                dp[k][i]=max(dp[k][i-1], max_diff+prices[i])
+        return dp[K][N-1]  
+        
+        
+        
+        
+        #O(KN^2)
+        N= len(prices)
+        K=2
+        if N<2:
+            return 0
+        dp=[[0]*N for i in range(K+1)]
+        for k in range(1, K+1):
+            for i in range(1, N):
+                max_diff=0
+                for j in range(i):
+                    max_diff=max(dp[k-1][j]-prices[j]+prices[i], max_diff)
+                dp[k][i]=max(dp[k][i-1], max_diff)
+        return dp[K][N-1]
+                        
+                    
+
+
+
 
 #The second buy, cost price-first_profit
 class Solution:
