@@ -1,21 +1,35 @@
 class Solution:
     def floodFill(self, image: List[List[int]], sr: int, sc: int, newColor: int) -> List[List[int]]:
+        height=len(image)
+        length=len(image[0])
         oldColor=image[sr][sc]
-        if newColor==oldColor:
-            return image
-        self.dfs(image, sr, sc, oldColor, newColor)
+        if oldColor!=newColor:
+            stack=[(sr, sc)]
+            while stack:
+                x, y=stack.pop()
+                image[x][y]=newColor
+                for i, j in [(x-1, y), (x+1, y), (x, y-1), (x, y+1)]:
+                    if 0<=i<height and 0<=j<length and image[i][j]==oldColor:
+                        stack.append((i, j))
         return image
+
         
-    def dfs(self, image, x, y, oldColor, newColor):
+#         oldColor=image[sr][sc]
+#         if newColor==oldColor:
+#             return image
+#         self.dfs(image, sr, sc, oldColor, newColor)
+#         return image
+        
+#     def dfs(self, image, x, y, oldColor, newColor):
 
 
-        if x<0 or y<0 or x>len(image)-1 or y>len(image[0])-1 or image[x][y]!=oldColor:
-            return
-        image[x][y]=newColor
-        self.dfs(image, x-1, y, oldColor, newColor)
-        self.dfs(image, x+1, y, oldColor, newColor)
-        self.dfs(image, x, y-1, oldColor, newColor)
-        self.dfs(image, x, y+1, oldColor, newColor)
+#         if x<0 or y<0 or x>len(image)-1 or y>len(image[0])-1 or image[x][y]!=oldColor:
+#             return
+#         image[x][y]=newColor
+#         self.dfs(image, x-1, y, oldColor, newColor)
+#         self.dfs(image, x+1, y, oldColor, newColor)
+#         self.dfs(image, x, y-1, oldColor, newColor)
+#         self.dfs(image, x, y+1, oldColor, newColor)
         
 
         
